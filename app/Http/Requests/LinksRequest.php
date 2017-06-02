@@ -26,7 +26,7 @@ class LinksRequest extends FormRequest
 
         return [
             'title' => 'required',
-            'link'  => 'required'
+            'link'  => 'required|active_url'
         ];
     }
 }
