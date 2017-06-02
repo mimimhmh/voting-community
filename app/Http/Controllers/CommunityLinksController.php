@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Channel;
 use App\CommunityLink;
 use App\Http\Requests\LinksRequest;
 
@@ -16,7 +17,8 @@ class CommunityLinksController extends Controller
     public function index() {
 
         $links = CommunityLink::paginate(25);
-        return view('community.index', compact('links'));
+        $channels = Channel::orderBy('title', 'asc')->get();
+        return view('community.index', compact('links', 'channels'));
     }
 
     public function store(LinksRequest $request) {

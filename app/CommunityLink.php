@@ -14,13 +14,16 @@ class CommunityLink extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function channel() {
+
+        return $this->belongsTo(Channel::class);
+    }
+
     public static function from(User $user) {
 
         $link = new static();
 
         $link->user_id = $user->id;
-
-        $link->channel_id = 1;
 
         return $link;
     }
