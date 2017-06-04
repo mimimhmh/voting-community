@@ -56,7 +56,7 @@ class CommunityLink extends Model
             $existing->touch();
 
             throw new CommunityLinkAlreadySubmitted;
-
+            //return $caller->alertLinkAlreadySubmitted();
         }
 
         return $this->fill($attributes)->save();

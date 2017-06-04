@@ -54,4 +54,31 @@ class CommunityLinksController extends Controller
         return back();
     }
 
+/*
+    public function store(LinksRequest $request) {
+
+
+        CommunityLink::from(auth()->user())->contribute($request->all(), $this);
+
+        if (auth()->user()->isTrusted())
+        {
+            flash('Thanks for contribution!', 'success');
+        } else
+        {
+            flash()->overlay('This contribution will be approved shortly.', 'Thanks!');
+        }
+
+        return back();
+    }
+
+    public function alertLinkAlreadySubmitted() {
+
+        flash()->overlay(
+            'We will instead bump the timestamps shortly. Thanks.',
+            'That link Has Already Been Submitted!');
+
+        return redirect('\community');
+    }
+    */
+
 }
