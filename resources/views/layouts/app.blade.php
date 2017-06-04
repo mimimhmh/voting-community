@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 </head>
 <body>
 <div id="app">
@@ -75,11 +76,19 @@
     </nav>
 
     <div class="container">
+
+        @include('flash::message')
+
         @yield('content')
     </div>
 </div>
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+<script>
+    $('div.alert').not('.alert-important').attr('id', 'flash-message');
+
+    $('#flash-overlay-modal').modal();
+</script>
 </body>
 </html>

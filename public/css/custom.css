@@ -1,0 +1,12 @@
+#flash-message {
+  position: absolute;
+  z-index: 10;
+  bottom: 20px;
+  right: 20px;
+  animation: flash-message 4s forwards;
+}
+
+@keyframes flash-message {
+  0%   {opacity: 1;}
+ 100% {opacity: 0; display:none;}
+}
