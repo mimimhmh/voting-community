@@ -86,7 +86,7 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script>
-    $('div.alert').not('.alert-important').attr('id', 'flash-message');
+    $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
 
     $('#flash-overlay-modal').modal();
 </script>

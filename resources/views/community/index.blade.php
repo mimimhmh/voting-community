@@ -4,15 +4,14 @@
 
     <div class="row">
         <div class="col-md-8">
-            <h1> Community </h1>
-            <ul class="Links">
+            <h3> Community </h3>
+            <ul class="list-group">
                 @if(count($links))
                     @foreach($links as $link)
-                        <li class="Links__link">
+                        <li class="list-group-item">
                             <span class="label label-default" style="background: {{ $link->channel->color }}">
                                 {{ $link->channel->title }}
                             </span>
-                            &nbsp;
                             <a href="{{ $link->link }}" target="_blank">
                                 {{ $link->title }}
                             </a>
@@ -27,7 +26,7 @@
                         </li>
                     @endforeach
                 @else
-                    <li class="Links__link">
+                    <li class="list-group-item">
                         No contributions yet.
                     </li>
                 @endif

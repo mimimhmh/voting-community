@@ -27,7 +27,7 @@ class LinksRequest extends FormRequest
         return [
             'channel_id' => 'required|exists:channels,id',
             'title' => 'required',
-            'link'  => 'required|active_url|unique:community_links'
+            'link'  => 'required|active_url'
         ];
     }
 }
