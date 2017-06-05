@@ -24,3 +24,5 @@
         </li>
     @endif
 </ul>
+
+{{ $links->links() }}
