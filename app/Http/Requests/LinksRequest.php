@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\CommunityLink;
 use Illuminate\Foundation\Http\FormRequest;
 
 class LinksRequest extends FormRequest
@@ -26,8 +27,18 @@ class LinksRequest extends FormRequest
 
         return [
             'channel_id' => 'required|exists:channels,id',
-            'title' => 'required',
-            'link'  => 'required|active_url'
+            'title'      => 'required',
+            'link'       => 'required|active_url'
         ];
+    }
+
+    /**
+     *
+     */
+    public function persist() {
+
+        CommunityLink::from(auth()->user())
+            ->contribute($this->all());
+
     }
 }

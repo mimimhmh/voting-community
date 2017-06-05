@@ -28,14 +28,15 @@ class CommunityLinksController extends Controller
     }
 
     /**
-     * @param LinksRequest $request
+     * @param LinksRequest $form
      * @return \Illuminate\Http\RedirectResponse
      *
      */
-    public function store(LinksRequest $request) {
+    public function store(LinksRequest $form) {
 
-        try{
-            CommunityLink::from(auth()->user())->contribute($request->all());
+        try
+        {
+            $form->persist();
 
             if (auth()->user()->isTrusted())
             {
@@ -44,7 +45,8 @@ class CommunityLinksController extends Controller
             {
                 flash()->overlay('This contribution will be approved shortly.', 'Thanks!');
             }
-        }catch (CommunityLinkAlreadySubmitted $e) {
+        } catch (CommunityLinkAlreadySubmitted $e)
+        {
 
             flash()->overlay(
                 'We will instead bump the timestamps shortly. Thanks.',
@@ -54,31 +56,31 @@ class CommunityLinksController extends Controller
         return back();
     }
 
-/*
-    public function store(LinksRequest $request) {
+    /*
+        public function store(LinksRequest $request) {
 
 
-        CommunityLink::from(auth()->user())->contribute($request->all(), $this);
+            CommunityLink::from(auth()->user())->contribute($request->all(), $this);
 
-        if (auth()->user()->isTrusted())
-        {
-            flash('Thanks for contribution!', 'success');
-        } else
-        {
-            flash()->overlay('This contribution will be approved shortly.', 'Thanks!');
+            if (auth()->user()->isTrusted())
+            {
+                flash('Thanks for contribution!', 'success');
+            } else
+            {
+                flash()->overlay('This contribution will be approved shortly.', 'Thanks!');
+            }
+
+            return back();
         }
 
-        return back();
-    }
+        public function alertLinkAlreadySubmitted() {
 
-    public function alertLinkAlreadySubmitted() {
+            flash()->overlay(
+                'We will instead bump the timestamps shortly. Thanks.',
+                'That link Has Already Been Submitted!');
 
-        flash()->overlay(
-            'We will instead bump the timestamps shortly. Thanks.',
-            'That link Has Already Been Submitted!');
-
-        return redirect('\community');
-    }
-    */
+            return redirect('\community');
+        }
+        */
 
 }
