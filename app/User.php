@@ -42,10 +42,13 @@ class User extends Authenticatable
         return $this->trusted;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function votes() {
 
-    public function voteFor(CommunityLink $link) {
-
-        return $link->votes()->create(['user_id' => $this->id]);
+        return $this->belongsToMany(CommunityLink::class, 'community_link_votes')
+            ->withTimestamps();
     }
 
     /**

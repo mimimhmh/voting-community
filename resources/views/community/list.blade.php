@@ -9,12 +9,13 @@
     @if(count($links))
         @foreach($links as $link)
             <li class="list-group-item">
-                <form method="post" action="">
+                <form method="post" action="/votes/{{ $link->id }}">
                     {{ csrf_field() }}
 
-                    <button type="button"
+                    <button type="submit"
                             class="btn {{ Auth::check() &&
                              Auth::user()->votedFor($link)? 'btn-success' : 'btn-default'  }}
+                            {{Auth::guest()? 'disabled' : ''  }}
                             btn-sm">
                         {{ $link->votes->count() }}
                     </button>
