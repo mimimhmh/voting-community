@@ -9,6 +9,17 @@
     @if(count($links))
         @foreach($links as $link)
             <li class="list-group-item">
+                <form method="post" action="">
+                    {{ csrf_field() }}
+
+                    <button type="button"
+                            class="btn {{ Auth::check() &&
+                             Auth::user()->votedFor($link)? 'btn-success' : 'btn-default'  }}
+                            btn-sm">
+                        {{ $link->votes->count() }}
+                    </button>
+                </form>
+
                 <a href="/community/{{ $link->channel->slug }}" class="label label-default"
                    style="background: {{ $link->channel->color }}">
                     {{ $link->channel->title }}
