@@ -26,6 +26,17 @@ class CommunityLink extends Model
         return $this->belongsTo(Channel::class);
     }
 
+
+
+    /**
+     * Links -> votes(community_link_id & user_id)
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function votes() {
+
+        return $this->hasMany(CommunityLinkVote::class, 'community_link_id');
+    }
+
     /**
      * @param User $user
      * @return static

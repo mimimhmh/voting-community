@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
+
     use Notifiable;
 
     /**
@@ -33,9 +34,28 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * @return mixed
+     */
     public function isTrusted() {
 
         return $this->trusted;
+    }
+
+
+    public function voteFor(CommunityLink $link) {
+
+        return $link->votes()->create(['user_id' => $this->id]);
+    }
+
+    /**
+     * see if the login user has voted for link.
+     * @param CommunityLink $link
+     * @return mixed
+     */
+    public function votedFor(CommunityLink $link) {
+
+        return $link->votes->contains('user_id', $this->id);
     }
 
 }
