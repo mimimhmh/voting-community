@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 
 use App\Channel;
-use App\CommunityLink;
 use App\Exceptions\CommunityLinkAlreadySubmitted;
 use App\Http\Requests\LinksRequest;
+use App\Queries\CommunityLinksQuery;
 
 class CommunityLinksController extends Controller
 {
@@ -22,14 +22,13 @@ class CommunityLinksController extends Controller
      */
     public function index(Channel $channel = null) {
 
-        $orderBy = request()->exists('popular') ? 'votes_count': 'updated_at';
+        $orderBy = request()->exists('popular')? 'votes_count' : 'updated_at';
 
-        $links = CommunityLink::with('channel', 'user')->withCount('votes')
-            ->forChannel($channel)
-            ->where('approved', 1)
-            ->orderBy($orderBy, 'DESC')
-            ->paginate(3);
+        $links = (new CommunityLinksQuery)->get($orderBy, $channel);
 
+//        $links = (new CommunityLinksQuery)->get(
+//            request()->exists('popular'), $channel
+//        );
 
         $channels = Channel::orderBy('title', 'asc')->get();
 

@@ -97,6 +97,11 @@ class CommunityLink extends Model
         return static::where('link', $link)->first();
     }
 
+    /**
+     * @param $queryBuilder
+     * @param $channel
+     * @return mixed
+     */
     public function scopeForChannel($queryBuilder, $channel) {
 
         if ($channel->exists)
