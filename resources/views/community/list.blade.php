@@ -8,7 +8,7 @@
 <ul class="list-group">
     @if(count($links))
         @foreach($links as $link)
-            <li class="list-group-item">
+            <li class="communityLinks list-group-item">
                 <form method="post" action="/votes/{{ $link->id }}">
                     {{ csrf_field() }}
 
