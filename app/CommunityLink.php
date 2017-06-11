@@ -27,6 +27,10 @@ class CommunityLink extends Model
     }
 
 
+    public function user() {
+
+        return $this->belongsTo(User::class);
+    }
 
     /**
      * Links -> votes(community_link_id & user_id)

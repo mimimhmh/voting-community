@@ -5,6 +5,16 @@
     @endif
 </h3>
 
+<ul class="nav nav-tabs">
+    <li class="{{ request()->exists('popular')? '' : 'active' }}">
+        <a href="{{ request()->url() }}">Most Recent</a>
+    </li>
+
+    <li class="{{ request()->exists('popular')? 'active' : '' }}">
+        <a href="?popular=1">Most Popular</a>
+    </li>
+</ul>
+
 <ul class="list-group">
     @if(count($links))
         @foreach($links as $link)
@@ -45,4 +55,5 @@
     @endif
 </ul>
 
-{{ $links->links() }}
+
+{{ $links->appends(request()->query())->links() }}

@@ -22,10 +22,14 @@ class CommunityLinksController extends Controller
      */
     public function index(Channel $channel = null) {
 
-        $links = CommunityLink::with('votes')->forChannel($channel)
+        $orderBy = request()->exists('popular') ? 'votes_count': 'updated_at';
+
+        $links = CommunityLink::with('channel', 'user')->withCount('votes')
+            ->forChannel($channel)
             ->where('approved', 1)
-            ->latest('updated_at')
+            ->orderBy($orderBy, 'DESC')
             ->paginate(3);
+
 
         $channels = Channel::orderBy('title', 'asc')->get();
 
